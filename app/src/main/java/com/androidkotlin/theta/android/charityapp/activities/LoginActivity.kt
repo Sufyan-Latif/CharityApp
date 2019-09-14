@@ -17,6 +17,8 @@ import android.view.View
 import android.widget.Toast
 import com.androidkotlin.theta.android.charityapp.R
 import com.androidkotlin.theta.android.charityapp.utils.Constant
+import com.androidkotlin.theta.android.charityapp.utils.Utility
+import kotlinx.android.synthetic.main.fragment_account_info.*
 
 
 class LoginActivity : AppCompatActivity() {
@@ -29,8 +31,9 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         btn_login.setOnClickListener {
-            if (isInternetConnected()) {
-                validateUsernamePassword()
+            if (Utility.isInternetConnected(this)) {
+                if (validateUsername() && validatePassword())
+                    animateButton()
             } else {
                 Snackbar.make(
                         coordinatorLayout,
@@ -71,26 +74,30 @@ class LoginActivity : AppCompatActivity() {
                     }
             val dialog = builder.create()
             dialog.show()
-
-            Log.d("Frag1", "Login Activity : "+Constant.signUpModel)
         }
     }
 
-    private fun validateUsernamePassword() {
-        if (etusername.text.toString() == "" || etpassword.text.toString() == "") {
-            if (etusername.text.toString() == "") {
-                etusername.error = "Enter Username"
-            } else
-                etusername.error = null
+    private fun validateUsername(): Boolean {
+        return if (etusername.text.toString() == ""){
+            etusername.requestFocus()
+            etusername.error = "Enter Username"
+            false
+        }
+        else {
+            etusername.error = null
+            true
+        }
+    }
 
-            if (etpassword.text.toString() == "") {
-                etpassword.error = "Enter Password"
-            } else
-                etpassword.error = null
-        } else {
-            textInputLayoutUsername.error = null
-            textInputLayoutPassword.error = null
-            animateButton()
+    private fun validatePassword(): Boolean {
+        return if (etpassword.text.toString() == ""){
+            etpassword.requestFocus()
+            etpassword.error = "Enter Password"
+            false
+        }
+        else {
+            etpassword.error = null
+            true
         }
     }
 
@@ -110,23 +117,18 @@ class LoginActivity : AppCompatActivity() {
         mDelayHandler!!.postDelayed(mRunnable, SPLASH_DELAY.toLong())
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStart() {
+        super.onStart()
+        if (Constant.signUpModel != "")
+            Constant.signUpModel = ""
+    }
+
+    override fun onStop() {
+        super.onStop()
         if (etusername.error != "")
             etusername.error = null
 
         if (etpassword.error != "")
             etpassword.error = null
-    }
-
-    private fun isInternetConnected(): Boolean {
-        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        return connectivityManager.activeNetworkInfo != null
-    }
-
-    override fun onStart() {
-        super.onStart()
-        if (Constant.signUpModel != "")
-            Constant.signUpModel = ""
     }
 }

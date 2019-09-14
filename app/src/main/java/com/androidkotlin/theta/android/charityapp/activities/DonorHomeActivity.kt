@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import com.androidkotlin.theta.android.charityapp.R
+import com.androidkotlin.theta.android.charityapp.fragments.DonateFragment
+import com.androidkotlin.theta.android.charityapp.fragments.DonorHomeFragment
 
 class DonorHomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -59,23 +61,30 @@ class DonorHomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> true
+
             else -> super.onOptionsItemSelected(item)
         }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
+        val fragmentTransaction= supportFragmentManager.beginTransaction()
         when (item.itemId) {
             R.id.nav_home -> {
                 // Handle the camera action
+                fragmentTransaction.replace(R.id.donor_home_container, DonorHomeFragment())
+                fragmentTransaction.commit()
             }
-            R.id.nav_gallery -> {
+            R.id.nav_organization_activities -> {
 
             }
-            R.id.nav_slideshow -> {
+            R.id.nav_donate -> {
+                fragmentTransaction.replace(R.id.donor_home_container, DonateFragment())
+                fragmentTransaction.commit()
 
+//                fab.visibility = View.GONE
             }
-            R.id.nav_tools -> {
+            R.id.nav_edit_profile -> {
 
             }
             R.id.nav_share -> {

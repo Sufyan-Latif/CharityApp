@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    tools:context=".fragments.DonateFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/pick_a_category"
+        android:textColor="#FF0808"
+        android:textSize="35sp"
+        android:textStyle="italic" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            >
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#00FFFFFF"
+                app:cardCornerRadius="5dp"
+                android:layout_marginTop="10dp"
+                app:cardElevation="2dp">
+
+                <Button
+                    android:id="@+id/btn_donate_food"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FF9800"
+                    android:drawableTop="@mipmap/ic_launcher"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"
+                    android:text="@string/donate_food"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#00FFFFFF"
+                app:cardCornerRadius="5dp"
+                android:layout_marginTop="10dp"
+                app:cardElevation="2dp">
+
+                <Button
+                    android:id="@+id/btn_donate_clothes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="#4CAF50"
+                    android:drawableTop="@mipmap/ic_launcher"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"
+                    android:text="@string/donate_clothes"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#00FFFFFF"
+                app:cardCornerRadius="5dp"
+                android:layout_marginTop="10dp"
+                app:cardElevation="2dp">
+
+                <Button
+                    android:id="@+id/btn_donate_for_kids"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="#9C27B0"
+                    android:drawableTop="@mipmap/ic_launcher"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"
+                    android:text="@string/donate_for_kids"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#00FFFFFF"
+                app:cardCornerRadius="5dp"
+                android:layout_marginTop="10dp"
+                app:cardElevation="2dp">
+
+                <Button
+                    android:id="@+id/btn_donate_for_religion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="#92B027"
+                    android:drawableTop="@mipmap/ic_launcher"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"
+                    android:text="@string/donate_for_religion"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#00FFFFFF"
+                app:cardCornerRadius="5dp"
+                android:layout_marginTop="10dp"
+                app:cardElevation="3dp">
+
+                <Button
+                    android:id="@+id/btn_donate_education"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="#C2BF4A"
+                    android:drawableTop="@mipmap/ic_launcher"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"
+                    android:text="@string/donate_for_education"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textStyle="bold" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#00FFFFFF"
+                app:cardCornerRadius="5dp"
+                android:layout_marginTop="10dp"
+                app:cardElevation="3dp">
+
+                <Button
+                    android:id="@+id/btn_donate_others"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="#A54646"
+                    android:drawableTop="@mipmap/ic_launcher"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"
+                    android:text="@string/others"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textStyle="bold" />
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

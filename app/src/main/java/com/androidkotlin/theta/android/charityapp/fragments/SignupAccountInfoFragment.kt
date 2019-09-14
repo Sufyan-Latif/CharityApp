@@ -37,8 +37,6 @@ class AccountInfoFragment : Fragment() {
         // Inflate the layout for this fragment
         myView =  inflater.inflate(R.layout.fragment_account_info, container, false)
 
-        Log.d("Frag1", "Account Info : "+Constant.signUpModel)
-
         val done: Button = myView.findViewById(R.id.btn_done)
         val back: Button = myView.findViewById(R.id.btn_back)
 
@@ -78,9 +76,7 @@ class AccountInfoFragment : Fragment() {
         }
 
         back.setOnClickListener {
-            val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.signup_container, SignupPersonalInfoFragment())
-            fragmentTransaction.commit()
+            activity!!.onBackPressed()
         }
 
         return myView

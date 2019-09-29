@@ -17,12 +17,20 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_donate" />
         <item
+            android:id="@+id/nav_setReminder"
+            android:icon="@drawable/ic_alarm_on_black_24dp"
+            android:title="@string/set_reminder"/>
+        <item
+            android:id="@+id/nav_viewHistory"
+            android:icon="@drawable/ic_history_black_24dp"
+            android:title="@string/view_history"/>
+        <item
             android:id="@+id/nav_edit_profile"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/menu_edit_profile" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/communicate">
         <menu>
             <item
                 android:id="@+id/nav_share"

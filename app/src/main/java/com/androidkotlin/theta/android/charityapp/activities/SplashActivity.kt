@@ -17,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
 
         mDelayHandler = Handler()
         val mRunnable = Runnable {
-            val intent= Intent(this, LoginActivity::class.java)
+            val intent= Intent(this, DonorHomeActivity::class.java)
 //            val intent= Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()

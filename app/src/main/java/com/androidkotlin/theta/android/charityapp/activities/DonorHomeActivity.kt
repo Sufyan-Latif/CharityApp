@@ -14,6 +14,7 @@ import android.view.Menu
 import com.androidkotlin.theta.android.charityapp.R
 import com.androidkotlin.theta.android.charityapp.fragments.DonateFragment
 import com.androidkotlin.theta.android.charityapp.fragments.DonorHomeFragment
+import com.androidkotlin.theta.android.charityapp.fragments.SetReminderFragment
 
 class DonorHomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -83,6 +84,12 @@ class DonorHomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 fragmentTransaction.commit()
 
 //                fab.visibility = View.GONE
+            }
+            R.id.nav_setReminder -> {
+                fragmentTransaction.replace(R.id.donor_home_container, SetReminderFragment()).commit()
+            }
+            R.id.nav_viewHistory -> {
+
             }
             R.id.nav_edit_profile -> {
 

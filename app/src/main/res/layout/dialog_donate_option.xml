@@ -17,6 +17,7 @@
         android:layout_marginTop="15dp"/>
 
     <TextView
+        android:id="@+id/tvGiveByYourself"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/ic_username"
@@ -33,6 +34,7 @@
         android:background="#31000000"/>
 
     <TextView
+        android:id="@+id/tvUseOurService"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/ic_directions_bike_black_24dp"

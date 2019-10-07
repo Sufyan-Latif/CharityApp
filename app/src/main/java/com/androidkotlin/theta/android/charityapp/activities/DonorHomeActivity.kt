@@ -1,5 +1,8 @@
 package com.androidkotlin.theta.android.charityapp.activities
 
+import android.content.DialogInterface
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
@@ -8,16 +11,23 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import android.support.v4.widget.DrawerLayout
 import android.support.design.widget.NavigationView
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
+import android.view.View
+import android.widget.TextView
+import android.widget.Toast
 import com.androidkotlin.theta.android.charityapp.R
 import com.androidkotlin.theta.android.charityapp.fragments.DonateFragment
+import com.androidkotlin.theta.android.charityapp.fragments.DonateHistoryFragment
 import com.androidkotlin.theta.android.charityapp.fragments.DonorHomeFragment
 import com.androidkotlin.theta.android.charityapp.fragments.SetReminderFragment
+import com.androidkotlin.theta.android.charityapp.utils.SharedPrefs
 
 class DonorHomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    private var sharedPrefs: SharedPreferences? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donor_home)
@@ -25,6 +35,8 @@ class DonorHomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         setSupportActionBar(toolbar)
 
         title = resources.getString(R.string.app_name)
+
+        sharedPrefs = SharedPrefs.getSharedPrefs(this)
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
@@ -38,7 +50,19 @@ class DonorHomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
+        val headerView: View = navView.getHeaderView(0)
+        val tvName: TextView = headerView.findViewById(R.id.tvName)
+        val tvUsername: TextView = headerView.findViewById(R.id.tvUsername)
+
+        val name: String? = sharedPrefs?.getString("first_name", "") + " " + sharedPrefs?.getString("last_name", "")
+        tvName.text = name
+        tvUsername.text = sharedPrefs?.getString("username", "")
+
         navView.setNavigationItemSelectedListener(this)
+
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.donor_home_container, DonorHomeFragment())
+        fragmentTransaction.commit()
     }
 
     override fun onBackPressed() {
@@ -69,7 +93,7 @@ class DonorHomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
-        val fragmentTransaction= supportFragmentManager.beginTransaction()
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
         when (item.itemId) {
             R.id.nav_home -> {
                 // Handle the camera action
@@ -86,10 +110,11 @@ class DonorHomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 //                fab.visibility = View.GONE
             }
             R.id.nav_setReminder -> {
+                Toast.makeText(this, "Long click on item to make changes", Toast.LENGTH_SHORT).show()
                 fragmentTransaction.replace(R.id.donor_home_container, SetReminderFragment()).commit()
             }
             R.id.nav_viewHistory -> {
-
+                fragmentTransaction.replace(R.id.donor_home_container, DonateHistoryFragment()).commit()
             }
             R.id.nav_edit_profile -> {
 
@@ -99,6 +124,24 @@ class DonorHomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             R.id.nav_send -> {
 
+            }
+            R.id.nav_logout -> {
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Alert!")
+                        .setMessage("Are you sure you want to logout?")
+                        .setPositiveButton("YES") { _, _ ->
+                            run {
+                                val editor = sharedPrefs?.edit()
+                                editor?.clear()
+                                editor?.apply()
+                                val intent = Intent(this, LoginActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                        }
+                        .setNegativeButton("NO") { _, _ -> }
+                        .create()
+                        .show()
             }
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)

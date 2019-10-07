@@ -16,24 +16,45 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.androidkotlin.theta.android.charityapp.R
+import com.androidkotlin.theta.android.charityapp.models.Acceptor
+import com.androidkotlin.theta.android.charityapp.models.Donor
+import com.androidkotlin.theta.android.charityapp.networks.CharityService
+import com.androidkotlin.theta.android.charityapp.networks.LoginResponse
 import com.androidkotlin.theta.android.charityapp.utils.Constant
+import com.androidkotlin.theta.android.charityapp.utils.SharedPrefs
 import com.androidkotlin.theta.android.charityapp.utils.Utility
 import kotlinx.android.synthetic.main.fragment_account_info.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class LoginActivity : AppCompatActivity() {
 
     private var mDelayHandler: Handler? = null
     private var SPLASH_DELAY = 3000
+    private var username: String? = null
+    private var password: String? = null
+
+    private lateinit var reducer: AnimatorSet
+    private lateinit var resizer: AnimatorSet
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        reducer = AnimatorInflater.loadAnimator(this, R.animator.reduce_size) as AnimatorSet
+        resizer = AnimatorInflater.loadAnimator(this, R.animator.regain_size) as AnimatorSet
+        reducer.setTarget(btn_login)
+        resizer.setTarget(btn_login)
+
         btn_login.setOnClickListener {
+            username = etUsername.text.toString()
+            password = etPassword.text.toString()
             if (Utility.isInternetConnected(this)) {
                 if (validateUsername() && validatePassword())
-                    animateButton()
+                    login(username!!, password!!)
+//                    animateButton()
             } else {
                 Snackbar.make(
                         coordinatorLayout,
@@ -52,7 +73,7 @@ class LoginActivity : AppCompatActivity() {
         tv_register.setOnClickListener {
 
             val intent = Intent(this@LoginActivity, SignupActivity::class.java)
-            val models = arrayOf("Acceptor", "Donor", "Organization")
+            val models = arrayOf("Acceptor", "Donor"/*, "Organization"*/)
             val builder: AlertDialog.Builder = AlertDialog.Builder(this@LoginActivity)
                     .setTitle("Register as !")
                     .setItems(models)
@@ -66,10 +87,10 @@ class LoginActivity : AppCompatActivity() {
                                 Constant.signUpModel = "donor"
                                 startActivity(intent)
                             }
-                            2 -> {
+/*                            2 -> {
                                 Constant.signUpModel = "organization"
                                 startActivity(intent)
-                            }
+                            }*/
                         }
                     }
             val dialog = builder.create()
@@ -77,42 +98,119 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun login(username: String, password: String) {
+        setLoading(true)
+        val service = CharityService.getRetrofitInstance()
+        val call = service?.login(username, password)
+
+        call?.enqueue(object : Callback<LoginResponse>{
+
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                setLoading(false)
+                if (response.isSuccessful){
+                    val body = response.body()
+                    if (body?.code.equals("success")){
+                        when(body?.type){
+                            "donor"->{
+                                val donor: Donor? = body.donor
+                                val sharedPrefs = SharedPrefs.getSharedPrefs(this@LoginActivity)
+                                val editor = sharedPrefs?.edit()
+                                editor?.putString("type", "donor")
+                                editor?.putString("username", donor?.username)
+                                editor?.putString("first_name", donor?.firstName)
+                                editor?.putString("last_name", donor?.lastName)
+                                editor?.putString("address", donor?.address)
+                                editor?.putString("gender", donor?.gender)
+                                editor?.putString("contact", donor?.contactNum)
+                                editor?.apply()
+                                val intent = Intent(this@LoginActivity, DonorHomeActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                            "acceptor" -> {
+                                val acceptor: Acceptor? = body.acceptor
+                                val sharedPrefs = SharedPrefs.getSharedPrefs(this@LoginActivity)
+                                val editor = sharedPrefs?.edit()
+                                editor?.putString("type", "acceptor")
+                                editor?.putString("username", acceptor?.username)
+                                editor?.putString("first_name", acceptor?.firstName)
+                                editor?.putString("last_name", acceptor?.lastName)
+                                editor?.putString("address", acceptor?.address)
+                                editor?.putString("gender", acceptor?.gender)
+                                editor?.putString("contact", acceptor?.contactNum)
+                                editor?.apply()
+                                val intent = Intent(this@LoginActivity, AcceptorWelcomeActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                            else ->
+                                Toast.makeText(this@LoginActivity, "Invalid username or password", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    else if (response.body()?.code.equals("failure"))
+                        Toast.makeText(this@LoginActivity, "Invalid username or password", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                setLoading(false)
+                Toast.makeText(this@LoginActivity, "Error Occured" + t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
     private fun validateUsername(): Boolean {
-        return if (etusername.text.toString() == ""){
-            etusername.requestFocus()
-            etusername.error = "Enter Username"
+        return if (etUsername.text.toString() == ""){
+            etUsername.requestFocus()
+            etUsername.error = "Enter Username"
             false
         }
         else {
-            etusername.error = null
+            etUsername.error = null
             true
         }
     }
 
     private fun validatePassword(): Boolean {
-        return if (etpassword.text.toString() == ""){
-            etpassword.requestFocus()
-            etpassword.error = "Enter Password"
+        return if (etPassword.text.toString() == ""){
+            etPassword.requestFocus()
+            etPassword.error = "Enter Password"
             false
         }
         else {
-            etpassword.error = null
+            etPassword.error = null
             true
+        }
+    }
+
+    private fun setLoading(isLoading: Boolean){
+        if (isLoading){
+            etUsername.isEnabled = false
+            etPassword.isEnabled = false
+            btn_login.isEnabled = false
+            tv_register.isEnabled = false
+            progressBar.visibility = View.VISIBLE
+            reducer.start()
+        }
+        else{
+            etUsername.isEnabled = true
+            etPassword.isEnabled = true
+            btn_login.isEnabled = true
+            tv_register.isEnabled = true
+            resizer.start()
+//            progressBar.visibility = View.INVISIBLE
         }
     }
 
     private fun animateButton() {
         progressBar.visibility = View.VISIBLE
-        val reducer = AnimatorInflater.loadAnimator(this, R.animator.reduce_size) as AnimatorSet
-        reducer.setTarget(btn_login)
         reducer.start()
 
         mDelayHandler = Handler()
         val mRunnable = Runnable {
-            val resizer = AnimatorInflater.loadAnimator(this, R.animator.regain_size) as AnimatorSet
-            resizer.setTarget(btn_login)
+
             resizer.start()
-            Toast.makeText(this, "Welcome " + etusername.text, Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "Welcome " + etUsername.text, Toast.LENGTH_SHORT).show()
         }
         mDelayHandler!!.postDelayed(mRunnable, SPLASH_DELAY.toLong())
     }
@@ -125,10 +223,10 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        if (etusername.error != "")
-            etusername.error = null
+        if (etUsername.error != "")
+            etUsername.error = null
 
-        if (etpassword.error != "")
-            etpassword.error = null
+        if (etPassword.error != "")
+            etPassword.error = null
     }
 }

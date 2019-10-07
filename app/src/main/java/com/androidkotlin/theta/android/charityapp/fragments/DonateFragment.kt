@@ -2,6 +2,7 @@ package com.androidkotlin.theta.android.charityapp.fragments
 
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.Gravity
@@ -12,6 +13,7 @@ import android.widget.Button
 import android.widget.TextView
 
 import com.androidkotlin.theta.android.charityapp.R
+import com.androidkotlin.theta.android.charityapp.activities.PickupServiceActivity
 
 /**
  * A simple [Fragment] subclass.
@@ -71,7 +73,18 @@ class DonateFragment : Fragment(), View.OnClickListener {
         val dialog = Dialog(myView.context, R.style.custom_Dialog)
         val dialogView = LayoutInflater.from(myView.context).inflate(R.layout.dialog_donate_option, null)
         
-//        val tvGiveByYourself = dialogView.findViewById<TextView>(R.id.tvgi)
+        val tvGiveByYourself = dialogView.findViewById<TextView>(R.id.tvGiveByYourself)
+        val tvUseOurService = dialogView.findViewById<TextView>(R.id.tvUseOurService)
+
+        tvGiveByYourself.setOnClickListener {
+            val intent = Intent(myView.context, PickupServiceActivity::class.java)
+            startActivity(intent)
+        }
+
+        tvUseOurService.setOnClickListener {
+            val intent = Intent(myView.context, PickupServiceActivity::class.java)
+            startActivity(intent)
+        }
 
         dialog.setContentView(dialogView)
         val window = dialog.window

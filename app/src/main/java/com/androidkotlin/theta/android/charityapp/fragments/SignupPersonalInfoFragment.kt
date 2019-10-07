@@ -39,8 +39,6 @@ class SignupPersonalInfoFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_donor_signup_one, container, false)
 
-        Log.d("Frag1", "Personal Info : "+Constant.signUpModel)
-
         myView.findViewById<TextView>(R.id.tv_dob).setOnClickListener { showCalender() }
 
         val back: Button = myView.findViewById(R.id.btn_donor_back)

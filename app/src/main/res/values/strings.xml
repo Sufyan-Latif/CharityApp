@@ -54,4 +54,22 @@
     <string name="cancel">CANCEL</string>
     <string name="update">Update</string>
     <string name="delete">Delete</string>
+    <string name="where_will_you_give_today">Where will you give today?</string>
+    <string name="donate_now">Donate Now</string>
+    <string name="view_record">View Record</string>
+    <string name="enter_details">Enter Details</string>
+    <string name="upload_photo">Upload Photo</string>
+    <string name="done">Done</string>
+    <string name="description_optional">Description (Optional)</string>
+    <string name="amount_optional">Amount (Optional)</string>
+    <string name="logout">Logout</string>
+    <string name="no_donations_yet">No Donations Yet</string>
+    <string name="date_of_birth">Date of Birth:</string>
+    <string name="dd_mm_yyyy">DD/MM/YYYY</string>
+    <string name="gender">Gender:</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="account_information">Account Information</string>
 </resources>

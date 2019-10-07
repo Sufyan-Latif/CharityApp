@@ -3,6 +3,7 @@
     package="com.androidkotlin.theta.android.charityapp">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,11 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.PickupServiceActivity"></activity>
+        <activity android:name=".activities.AcceptorWelcomeActivity"></activity>
+        <activity android:name=".activities.PickupServiceActivity" />
         <activity
             android:name=".activities.DonorHomeActivity"
             android:label="@string/title_activity_donor_home"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".activities.SignupActivity" />
         <activity android:name=".activities.LoginActivity" />
         <activity

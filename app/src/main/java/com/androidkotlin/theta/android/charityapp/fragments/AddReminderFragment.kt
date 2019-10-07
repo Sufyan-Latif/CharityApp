@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TimePicker
+import android.widget.Toast
 
 import com.androidkotlin.theta.android.charityapp.R
 import com.androidkotlin.theta.android.charityapp.databases.CharityDatabase
@@ -42,12 +43,15 @@ class AddReminderFragment : Fragment() {
         btnOk.setOnClickListener {
             val time: String = tpReminder.currentHour.toString() + ":" + tpReminder.currentMinute.toString()
             val instructions: String = etInstructions.text.toString()
-            val amount: Int = etAmount.text.toString().toInt()
+            var amount: Int = 0
+            if (etAmount.text.toString() != "")
+                amount = etAmount.text.toString().toInt()
             if (reminder != null){
                 updateReminder(reminder)
             }
 
             addNewReminder(time = time, instructions = instructions, amount = amount)
+            Toast.makeText(myView.context, "Reminder saved", Toast.LENGTH_SHORT).show()
         }
 
         btnCancel.setOnClickListener {
@@ -98,5 +102,6 @@ class AddReminderFragment : Fragment() {
                 SetReminderFragment.setRemindersList(remindersList!!)
             }
         }
+        UpdateReminderInBackground().execute()
     }
 }

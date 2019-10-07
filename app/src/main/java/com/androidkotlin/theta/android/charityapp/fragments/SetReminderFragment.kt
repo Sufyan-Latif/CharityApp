@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 
 import com.androidkotlin.theta.android.charityapp.R
 import com.androidkotlin.theta.android.charityapp.adapters.ReminderAdapter
@@ -58,8 +59,8 @@ class SetReminderFragment : Fragment() {
 
         bindViews()
 
-        val reminder = Reminder(time = "2334", instructions = "sdfsd", amount = 312)
-        remindersList?.add(reminder)
+        /*val reminder = Reminder(time = "2334", instructions = "sdfsd", amount = 312)
+        remindersList?.add(reminder)*/
 
 //        updateAdapter()
 
@@ -146,6 +147,7 @@ class SetReminderFragment : Fragment() {
                     override fun onPostExecute(result: Void?) {
                         super.onPostExecute(result)
                         updateAdapter()
+                        Toast.makeText(myView?.context, "Deleted Successfully", Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -160,7 +162,6 @@ class SetReminderFragment : Fragment() {
                     fragmentTransaction.addToBackStack(null)
                     fragmentTransaction.commit()
                 }
-
             }
         })
         rvReminder = myView!!.findViewById(R.id.rvReminder)

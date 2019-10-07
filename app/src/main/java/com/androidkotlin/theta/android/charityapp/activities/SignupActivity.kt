@@ -13,8 +13,6 @@ class SignupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
-        Log.d("Frag1", "Sign up Activity : "+Constant.signUpModel)
-
         title = "Sign up"
 
         if (Constant.signUpModel == "acceptor" || Constant.signUpModel == "donor"){

@@ -2,8 +2,8 @@ package com.androidkotlin.theta.android.charityapp.fragments
 
 
 import android.os.AsyncTask
+import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TimePicker
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 
 import com.androidkotlin.theta.android.charityapp.R
 import com.androidkotlin.theta.android.charityapp.databases.CharityDatabase
@@ -35,18 +36,33 @@ class AddReminderFragment : Fragment() {
 
         bindViews()
 
-        var reminder:Reminder? = null
-        if (arguments!= null){
+        var reminder: Reminder? = null
+        if (arguments != null) {
             reminder = arguments?.getSerializable("reminder") as Reminder
         }
 
         btnOk.setOnClickListener {
-            val time: String = tpReminder.currentHour.toString() + ":" + tpReminder.currentMinute.toString()
+            val hours = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                tpReminder.hour
+            } else {
+                tpReminder.currentHour
+            }
+            val minutes = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                tpReminder.minute
+            } else {
+                tpReminder.currentMinute
+            }
+            val ampm: String =
+                    if (hours < 12)
+                        "am"
+                    else
+                        "pm"
+            val time = "$hours:$minutes $ampm"
             val instructions: String = etInstructions.text.toString()
-            var amount: Int = 0
+            var amount: Int? = null
             if (etAmount.text.toString() != "")
                 amount = etAmount.text.toString().toInt()
-            if (reminder != null){
+            if (reminder != null) {
                 updateReminder(reminder)
             }
 
@@ -69,7 +85,7 @@ class AddReminderFragment : Fragment() {
         tpReminder = myView.findViewById(R.id.tpReminder)
     }
 
-    private fun addNewReminder(time: String, instructions: String, amount: Int) {
+    private fun addNewReminder(time: String, instructions: String, amount: Int?) {
         AsyncTask.execute {
             val db = CharityDatabase.getCharityDatabase(myView.context)
             db?.reminderDao()?.addReminder(Reminder(time = time, instructions = instructions, amount = amount))
@@ -79,7 +95,7 @@ class AddReminderFragment : Fragment() {
 
     private fun updateReminder(reminder: Reminder) {
 
-        class UpdateReminderInBackground() : AsyncTask<Void, Void, Void>(){
+        class UpdateReminderInBackground() : AsyncTask<Void, Void, Void>() {
 
             private var db: CharityDatabase? = null
 

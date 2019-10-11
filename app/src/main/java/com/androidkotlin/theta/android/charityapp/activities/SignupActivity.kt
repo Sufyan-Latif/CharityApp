@@ -1,8 +1,7 @@
 package com.androidkotlin.theta.android.charityapp.activities
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.androidkotlin.theta.android.charityapp.R
 import com.androidkotlin.theta.android.charityapp.fragments.SignupPersonalInfoFragment
 import com.androidkotlin.theta.android.charityapp.utils.Constant

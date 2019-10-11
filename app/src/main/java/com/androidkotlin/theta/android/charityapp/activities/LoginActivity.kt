@@ -1,6 +1,5 @@
 package com.androidkotlin.theta.android.charityapp.activities
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_login.*
 import android.animation.AnimatorInflater
@@ -10,11 +9,11 @@ import android.content.Intent
 import android.graphics.Paint
 import android.net.ConnectivityManager
 import android.os.Handler
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.androidkotlin.theta.android.charityapp.R
 import com.androidkotlin.theta.android.charityapp.models.Acceptor
 import com.androidkotlin.theta.android.charityapp.models.Donor
@@ -23,6 +22,7 @@ import com.androidkotlin.theta.android.charityapp.networks.LoginResponse
 import com.androidkotlin.theta.android.charityapp.utils.Constant
 import com.androidkotlin.theta.android.charityapp.utils.SharedPrefs
 import com.androidkotlin.theta.android.charityapp.utils.Utility
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_account_info.*
 import retrofit2.Call
 import retrofit2.Callback

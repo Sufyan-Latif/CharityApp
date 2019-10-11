@@ -3,23 +3,22 @@ package com.androidkotlin.theta.android.charityapp.fragments
 
 import android.os.AsyncTask
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.androidkotlin.theta.android.charityapp.R
 import com.androidkotlin.theta.android.charityapp.adapters.ReminderAdapter
-import com.androidkotlin.theta.android.charityapp.adapters.ReminderAdapter.OnReminderClick
+import com.androidkotlin.theta.android.charityapp.adapters.ReminderAdapter.OnReminderLongClick
 import com.androidkotlin.theta.android.charityapp.databases.CharityDatabase
 import com.androidkotlin.theta.android.charityapp.databases.Reminder
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_set_reminder.*
 
 /**
@@ -31,24 +30,24 @@ class SetReminderFragment : Fragment() {
 
     private var fabAddReminder: FloatingActionButton? = null
     private var rvReminder: RecyclerView? = null
+    private var mremindersList: List<Reminder>? = ArrayList()
 
 
     companion object{
-        private var remindersList: ArrayList<Reminder>? = ArrayList<Reminder>()
+        private var remindersList: ArrayList<Reminder>? = ArrayList()
         private var mReminderAdapter: ReminderAdapter? = null
 
         private fun updateAdapter() {
             mReminderAdapter!!.setReminderList(remindersList)
         }
 
-        public fun setRemindersList(remindersList: ArrayList<Reminder>){
+        fun setRemindersList(remindersList: ArrayList<Reminder>){
             this.remindersList = remindersList
             updateAdapter()
 
         }
-        public fun getRemindersList() : ArrayList<Reminder>?{
+        fun getRemindersList() : ArrayList<Reminder>?{
             return remindersList
-
         }
     }
 
@@ -64,7 +63,7 @@ class SetReminderFragment : Fragment() {
 
 //        updateAdapter()
 
-        class GetListInBackground() : AsyncTask<Void, Void, Void>(){
+        class GetListInBackground : AsyncTask<Void, Void, Void>(){
 
             private var db: CharityDatabase? = null
 
@@ -81,6 +80,7 @@ class SetReminderFragment : Fragment() {
             override fun onPostExecute(result: Void?) {
                 super.onPostExecute(result)
                 updateAdapter()
+
             }
         }
 
@@ -126,8 +126,8 @@ class SetReminderFragment : Fragment() {
 
 
     private fun bindViews() {
-        mReminderAdapter = ReminderAdapter(myView!!.context, object : OnReminderClick {
-            override fun onClick(reminder: Reminder, popupOption: Int) {
+        mReminderAdapter = ReminderAdapter(myView!!.context, object : ReminderAdapter.OnReminderLongClick {
+            override fun onLongClick(reminder: Reminder, popupOption: Int) {
 
                 class DeleteReminderInBackground() : AsyncTask<Void, Void, Void>(){
 

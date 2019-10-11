@@ -1,29 +1,28 @@
 package com.androidkotlin.theta.android.charityapp.activities
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
 import android.view.MenuItem
-import android.support.v4.widget.DrawerLayout
-import android.support.design.widget.NavigationView
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import com.androidkotlin.theta.android.charityapp.R
 import com.androidkotlin.theta.android.charityapp.fragments.DonateFragment
 import com.androidkotlin.theta.android.charityapp.fragments.DonateHistoryFragment
 import com.androidkotlin.theta.android.charityapp.fragments.DonorHomeFragment
 import com.androidkotlin.theta.android.charityapp.fragments.SetReminderFragment
 import com.androidkotlin.theta.android.charityapp.utils.SharedPrefs
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 
 class DonorHomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 

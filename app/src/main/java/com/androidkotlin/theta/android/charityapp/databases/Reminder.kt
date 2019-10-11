@@ -1,7 +1,7 @@
 package com.androidkotlin.theta.android.charityapp.databases
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
 @Entity(tableName = "reminders")

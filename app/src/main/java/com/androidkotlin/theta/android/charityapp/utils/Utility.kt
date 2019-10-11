@@ -2,7 +2,7 @@ package com.androidkotlin.theta.android.charityapp.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.support.v4.content.ContextCompat.getSystemService
+import androidx.core.content.ContextCompat.getSystemService
 
 class Utility {
     companion object{

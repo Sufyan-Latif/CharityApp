@@ -1,7 +1,6 @@
 package com.androidkotlin.theta.android.charityapp.adapters
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +8,15 @@ import android.widget.ExpandableListView
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import com.androidkotlin.theta.android.charityapp.R
 import com.androidkotlin.theta.android.charityapp.databases.Reminder
 import kotlinx.android.synthetic.main.reminder_list_item.view.*
 
-class ReminderAdapter(val context: Context, onReminderClickListener: OnReminderClick) : RecyclerView.Adapter<ReminderAdapter.ReminderViewHolder>() {
+class ReminderAdapter(val context: Context, onReminderLongClickListener: OnReminderLongClick) : RecyclerView.Adapter<ReminderAdapter.ReminderViewHolder>() {
 
     private var remindersList: ArrayList<Reminder> = arrayListOf()
-    private var onReminderClick: OnReminderClick? = onReminderClickListener
+    private var onReminderClick: OnReminderLongClick? = onReminderLongClickListener
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ReminderViewHolder {
         val view: View = LayoutInflater.from(context).inflate(R.layout.reminder_list_item, p0, false)
@@ -39,9 +39,9 @@ class ReminderAdapter(val context: Context, onReminderClickListener: OnReminderC
             popupMenu.menuInflater.inflate(R.menu.reminder_more_menu, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener {
                 if (it.title.equals("Update"))
-                    onReminderClick?.onClick(reminder, 0)
+                    onReminderClick?.onLongClick(reminder, 0)
                 else if (it.title.equals("Delete"))
-                    onReminderClick?.onClick(reminder, 1)
+                    onReminderClick?.onLongClick(reminder, 1)
                 Toast.makeText(context, "Menu Clicked", Toast.LENGTH_SHORT).show()
                 true
             }
@@ -62,7 +62,7 @@ class ReminderAdapter(val context: Context, onReminderClickListener: OnReminderC
         val tvAmount: TextView = itemView.tvAmount
     }
 
-    interface OnReminderClick{
-        fun onClick(reminder: Reminder, popupOption: Int)
+    interface OnReminderLongClick{
+        fun onLongClick(reminder: Reminder, popupOption: Int)
     }
 }

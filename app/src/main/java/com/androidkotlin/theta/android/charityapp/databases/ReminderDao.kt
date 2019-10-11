@@ -1,6 +1,6 @@
 package com.androidkotlin.theta.android.charityapp.databases
 
-import android.arch.persistence.room.*
+import androidx.room.*
 
 @Dao
 interface ReminderDao {

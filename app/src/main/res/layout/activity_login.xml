@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayout"
@@ -8,12 +9,10 @@
     android:background="@drawable/background"
     tools:context=".activities.LoginActivity">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="5dp">
-
-
 
         <ImageView
             android:id="@+id/imageView"
@@ -25,7 +24,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/charity_logo" />
+            app:srcCompat="@drawable/charity_logo"
+            android:contentDescription="@string/app_logo" />
 
         <TextView
             android:id="@+id/textView"
@@ -43,7 +43,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,9 +73,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:layout_editor_absoluteY="246dp" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutUsername"
             app:passwordToggleEnabled="true">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:layout_editor_absoluteY="246dp" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <Button
@@ -168,8 +168,6 @@
             app:layout_constraintStart_toEndOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    </android.support.constraint.ConstraintLayout>
-
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

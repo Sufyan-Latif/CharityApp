@@ -1,9 +1,9 @@
 package com.androidkotlin.theta.android.charityapp.activities
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import com.androidkotlin.theta.android.charityapp.R
 import kotlinx.android.synthetic.main.activity_pickup_service.*
 

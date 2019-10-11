@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -40,7 +40,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/et_layout_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_username"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -63,10 +63,10 @@
                         android:inputType="textEmailAddress"
                         android:padding="10dp"
                         android:textSize="20sp" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/et_layout_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/et_layout_username">
 
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_password"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -90,10 +90,10 @@
                         android:inputType="textPassword"
                         android:padding="10dp"
                         android:textSize="20sp" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/et_layout_con_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/et_layout_password">
 
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_con_password"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -117,9 +117,9 @@
                         android:inputType="textPassword"
                         android:padding="10dp"
                         android:textSize="20sp" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"

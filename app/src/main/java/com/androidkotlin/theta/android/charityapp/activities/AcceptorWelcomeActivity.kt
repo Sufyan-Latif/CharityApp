@@ -1,12 +1,13 @@
 package com.androidkotlin.theta.android.charityapp.activities
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.androidkotlin.theta.android.charityapp.R
 import com.androidkotlin.theta.android.charityapp.utils.SharedPrefs
 import kotlinx.android.synthetic.main.activity_acceptor_welcome.*
+
 
 class AcceptorWelcomeActivity : AppCompatActivity() {
 
